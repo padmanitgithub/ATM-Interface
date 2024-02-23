@@ -1,0 +1,77 @@
+package test;
+import java.util.*;
+interface ATM{
+	void deposit(double amount);
+	void withdraw(double amount);
+	void checkbalance();
+}
+class UserAccount implements ATM{
+	private double balance;
+	
+	public UserAccount(double balance) {
+		super();
+		this.balance = balance;
+	}
+	@Override
+	public void deposit(double amount) {
+		// TODO Auto-generated method stub
+		if(amount<=0) {
+			System.out.println("The deposited amount shoud be greater then 0 rupees");
+		}else {
+			balance+=amount;
+			System.out.println("The amount "+amount+" is deposited successfully");
+			System.out.println("Account Balance after Deposit:"+balance);
+		}
+	}
+	@Override
+	public void withdraw(double amount) {
+		// TODO Auto-generated method stub
+		if(balance<amount) {
+			System.out.println("Insufficient funds");
+		}else {
+			balance-=amount;
+			System.out.println("The amount "+amount+" is successfully widthdrawn");
+			System.out.println("Account Balance After Withdraw:"+balance);
+		}
+	}
+	@Override
+	public void checkbalance() {
+		// TODO Auto-generated method stub
+		System.out.println("Available Bank Balance: "+balance);
+	}
+}
+public class ATMInterface  {
+	public static void main(String[] args) {
+		Scanner sc=new Scanner(System.in);
+		try {
+		UserAccount ac=new UserAccount(10000);//Initial balance is 1000/-
+		for(int i=0;i<=i+11;i++) {
+		System.out.println("1) Check Bank Balance");
+		System.out.println("2) Deposit amount");
+		System.out.println("3) Width draw amount");
+		System.out.println("4) Exit");
+		System.out.println("Enter your choice:");
+		int op=sc.nextInt();
+		if(op==1) {
+			ac.checkbalance();
+		}else if(op==2) {
+			System.out.println("Enter the amount to deposit:");
+			ac.deposit(sc.nextDouble());
+		}else if(op==3) {
+			System.out.println("Enter the amount to withdraw:");
+			ac.withdraw(sc.nextDouble());
+			ac.checkbalance();
+			}else if(op==4) {
+				System.out.println("Your Request of Exit is Successfull");
+				System.exit(0);
+			}
+		else {
+				System.out.println("Invalid Option");
+				break;
+		}
+	}sc.close();
+	}catch(Exception e) {
+		System.err.println("The Amount Should be in numbres");
+	}
+}
+}
